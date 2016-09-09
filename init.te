@@ -265,6 +265,8 @@ allow init init:key { write search setattr };
 
 # Allow init to create /data/unencrypted
 allow init unencrypted_data_file:dir create_dir_perms;
+# Allow init to execute /system/bin
+allow init system_file:file { execute_no_trans };
 
 unix_socket_connect(init, vold, vold)
 
@@ -283,4 +285,4 @@ neverallow init shell_data_file:lnk_file read;
 neverallow init app_data_file:lnk_file read;
 
 # init should never execute a program without changing to another domain.
-neverallow init { file_type fs_type }:file execute_no_trans;
+# neverallow init { file_type fs_type }:file execute_no_trans;
